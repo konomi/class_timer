@@ -2,11 +2,24 @@ import streamlit as st
 import time
 
 st.set_page_config(
-    page_title="Kyoso Project Timer"
+    page_title="Classrooom Timer"
 )
 
+st.markdown(
+    """
+<style>
+[data-testid="stMetricValue"] {
+    font-size: 150px;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+min = st.slider('select time (minutes)', max_value=90)
+
 ph = st.empty()
-N = 5 * 60
+N = min * 60
 for secs in range(N,0,-1):
     mm, ss = secs//60, secs%60
     ph.metric("Countdown", f"{mm:02d}:{ss:02d}")
