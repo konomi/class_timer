@@ -25,4 +25,3 @@ for secs in range(N,0,-1):
     ph.metric("Countdown", f"{mm:02d}:{ss:02d}")
     time.sleep(1)
 
-st.write("Human Data Interaction Lab, Kyushu University"
