@@ -16,7 +16,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-min = st.slider('select time (minutes)', max_value=30)
+min = st.slider('select time (minutes)', max_value=90)
 
 ph = st.empty()
 N = min * 60
