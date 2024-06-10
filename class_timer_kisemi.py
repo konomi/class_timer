@@ -17,6 +17,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+st.radio("test", ("1","2","3","4","5"), horizontal=True)
 min = st.slider('select time (minutes)', max_value=90)
 
 ph = st.empty()
