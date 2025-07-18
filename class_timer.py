@@ -26,10 +26,6 @@ for secs in range(N,-1,-1):
     ph.metric("Countdown", f"{mm:02d}:{ss:02d}")
     time.sleep(1)
     if N > 0 and secs == 0:
-        image_num = random.randint(1,2)
-        if image_num == 1:
-            image_name = 'happy.jpg'
-        elif image_num == 2:
-            image_name = 'thecat.jpg'
+        image_name = random.choice(['happy.jpg', 'thecat.jpg', 'unsplash-cat.jpg'])
+        #image_name = random.choice(['unsplash-cat.jpg'])
         st.image(image_name, caption='countdown finished')
-
