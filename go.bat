@@ -1,0 +1,1 @@
+streamlit run class_timer.py
