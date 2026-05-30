@@ -26,14 +26,17 @@ if "remaining_sec" not in st.session_state:
     st.session_state.remaining_sec = 0
 if "finished_shown" not in st.session_state:
     st.session_state.finished_shown = False
+if "start_click_count" not in st.session_state:
+    st.session_state.start_click_count = 0
 
 minutes = st.slider("select time (minutes)", min_value=1, max_value=90, value=10)
 duration_sec = minutes * 60
 
 start_col, pause_col, reset_col = st.columns(3)
 
-if start_col.button("SStart"):
+if start_col.button("Start"):
     # Start a fresh timer based on the currently selected duration.
+    st.session_state.start_click_count += 1
     st.session_state.running = True
     st.session_state.end_ts = time.time() + duration_sec
     st.session_state.finished_shown = False
@@ -48,6 +51,11 @@ if reset_col.button("Reset"):
     st.session_state.end_ts = None
     st.session_state.remaining_sec = 0
     st.session_state.finished_shown = False
+
+count_col, count_reset_col = st.columns([3, 2])
+count_col.metric("Start clicks", st.session_state.start_click_count)
+if count_reset_col.button("Reset start count"):
+    st.session_state.start_click_count = 0
 
 if st.session_state.running:
     remaining = max(0, int(st.session_state.end_ts - time.time()))
