@@ -75,6 +75,18 @@ st.markdown(
     font-weight: 600;
     margin-top: -0.75rem;
 }
+.depletion-bar {
+    width: 100%;
+    height: 34px;
+    margin: 1.25rem 0 0.75rem;
+    border: 3px solid #222;
+    background: #f1f1f1;
+    overflow: hidden;
+}
+.depletion-fill {
+    height: 100%;
+    transition: width 0.25s linear, background-color 0.25s linear;
+}
 </style>
 """,
     unsafe_allow_html=True,
@@ -137,6 +149,8 @@ if st.session_state.running and remaining_sec == 0:
 timer_color = "green" if 0 < remaining_sec <= 60 else "black"
 phase_color = "green" if 0 < remaining_sec <= 60 else "black"
 phase_text = "\u3082\u306e\u307e\u306d\u30bf\u30a4\u30e0" if 0 < remaining_sec <= 60 else "\u81ea\u5df1\u7d39\u4ecb\u30bf\u30a4\u30e0"
+depletion_percent = max(0, min(100, remaining_sec / DURATION_SEC * 100))
+depletion_color = "#16a34a" if 0 < remaining_sec <= 60 else "#2563eb"
 mm, ss = remaining_sec // 60, remaining_sec % 60
 
 if (
@@ -164,6 +178,9 @@ st.markdown(
     <div class="count-text">{st.session_state.complete_count}</div>
 </div>
 <div class="phase-text" style="color: {phase_color};">{phase_text}</div>
+<div class="depletion-bar" aria-label="Remaining time">
+    <div class="depletion-fill" style="width: {depletion_percent:.1f}%; background-color: {depletion_color};"></div>
+</div>
 """,
     unsafe_allow_html=True,
 )
