@@ -64,12 +64,6 @@ st.markdown(
     font-weight: 700;
     line-height: 1;
 }
-.count-text {
-    color: blue;
-    font-size: 80px;
-    font-weight: 700;
-    line-height: 1;
-}
 .phase-text {
     font-size: 28px;
     font-weight: 600;
@@ -148,7 +142,8 @@ if st.session_state.running and remaining_sec == 0:
 
 timer_color = "green" if 0 < remaining_sec <= 60 else "black"
 phase_color = "green" if 0 < remaining_sec <= 60 else "black"
-phase_text = "\u3082\u306e\u307e\u306d\u30bf\u30a4\u30e0" if 0 < remaining_sec <= 60 else "\u81ea\u5df1\u7d39\u4ecb\u30bf\u30a4\u30e0"
+phase_name = "\u3082\u306e\u307e\u306d\u30bf\u30a4\u30e0" if 0 < remaining_sec <= 60 else "\u81ea\u5df1\u7d39\u4ecb\u30bf\u30a4\u30e0"
+phase_text = f"{st.session_state.complete_count}\u56de\u76ee\u306e{phase_name}"
 depletion_percent = max(0, min(100, remaining_sec / DURATION_SEC * 100))
 depletion_color = "#16a34a" if 0 < remaining_sec <= 60 else "#2563eb"
 mm, ss = remaining_sec // 60, remaining_sec % 60
@@ -175,7 +170,6 @@ st.markdown(
     f"""
 <div class="timer-row">
     <div class="timer-text" style="color: {timer_color};">{mm:02d}:{ss:02d}</div>
-    <div class="count-text">{st.session_state.complete_count}</div>
 </div>
 <div class="phase-text" style="color: {phase_color};">{phase_text}</div>
 <div class="depletion-bar" aria-label="Remaining time">
